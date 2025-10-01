@@ -3,7 +3,7 @@
   "description": "Toast system context with react",
   "author": "Minyoung Tommy Kim",
   "private": false,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "MODE=demo vite",

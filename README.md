@@ -8,7 +8,7 @@ react-nt-toast
 ![Static Badge](https://img.shields.io/badge/vite-bundler-%23646CFF?style=for-the-badge)
 ![Static Badge](https://img.shields.io/badge/react_context_api-useToast-%234FC08D?style=for-the-badge)
 
-![preview](https://github.com/noistommy/vue-nt-toast/assets/6008185/991fe4fc-1144-440d-8b20-de1ede57f0b7)
+<!-- ![preview](https://github.com/noistommy/vue-nt-toast/assets/6008185/991fe4fc-1144-440d-8b20-de1ede57f0b7) -->
 
 
 `react-nt-toast` is a JavaScript notification system library. It is made available through the React Context API in the  project.
