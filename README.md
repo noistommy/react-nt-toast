@@ -26,7 +26,7 @@ You can set multiple options across the system, including theme, location, and s
 
 ## Demo
 
-<!-- [vue-nt-toast](https://noistommy.github.io/vue-nt-toast) demo page. -->
+[vue-nt-toast](https://noistommy.github.io/vue-nt-toast) demo page.
 
 ---
 ## Installation
