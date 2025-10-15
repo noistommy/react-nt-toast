@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { BeSwitch } from 'react-be-ui';
 import { useToast } from '../../../dist/nt-toast.es'
 
-const status = ['success', 'info', 'danger', 'attention', 'important'];
+const status = ['success', 'info', 'danger', 'attention', 'importance'];
 const themes = ['default', 'light', 'icon', 'icon-bg', 'line'];
 const positions = ['top-left', 'top-center', 'top-right', 'bottom-left', 'bottom-center', 'bottom-right', 'top-full-width', 'bottom-full-width'];
 const colorList = ['red', 'orange', 'yellow', 'lightgreen', 'green', 'lightblue', 'blue', 'deepblue', 'deeppurple', 'purple', 'brown', 'gray']
