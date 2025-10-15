@@ -7,13 +7,13 @@ $success: #528E64;
 $info: #62B0BC;
 $danger: #D53012;
 $attention: #EC6E00;
-$importance: #FDC036;
+$important: #FDC036;
 
 $lightSuccess: #CBE1D2;
 $lightInfo: #D4E9ED;
 $lightDanger: #FBE0DA;
 $lightAttention: #FFE9D6;
-$lightImportance: #FFF3D7;
+$lightImportant: #FFF3D7;
 
 $white: #FFFFFF;
 
@@ -42,11 +42,11 @@ $stateColors: (
       text: $white,
       lightBg: $lightAttention,
     ),
-    'importance': (
-      bg: $importance,
-      border: color.adjust($importance, $lightness: -10%),
+    'important': (
+      bg: $important,
+      border: color.adjust($important, $lightness: -10%),
       text: $white,
-      lightBg: $lightImportance,
+      lightBg: $lightImportant,
     ),
 );
 

@@ -13,7 +13,7 @@ react-nt-toast
 
 `react-nt-toast` is a JavaScript notification system library. It is made available through the React Context API in the  project.
 
-It is designed to operate outside the application (the top layer) so as not to affect the application's layer system as much as possible, and provides status indications of "success", "risk", "information", "attention", and "important" depending on the type of content.
+It is designed to operate outside the application (the top layer) so as not to affect the application's layer system as much as possible, and provides status indications of "success", "danger", "info", "attention", and "important" depending on the type of content.
 
 You can set multiple options across the system, including theme, location, and snack bar mode, to reflect them in the entire system, and you can also apply options that can be changed every time the user runs it.
 
