@@ -71,7 +71,7 @@ class Toast {
   setContents() { 
     const contents = document.createElement('div')
     const title = document.createElement('div')
-    title.classList.add('h5', 'title', 'ellipsis')
+    title.classList.add('title', 'ellipsis')
     const description = document.createElement('div')
     if (typeof this.msg === 'string') {
       description.innerHTML = this.msg

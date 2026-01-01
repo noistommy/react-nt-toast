@@ -218,7 +218,7 @@ $colors: (
       // border: 1px solid #d6d6d6;
       opacity: 0;
       //transform: translateX(20px);
-      font-size: 1.2em;
+      font-size: 1rem;
       overflow: hidden;
       animation: swing-off 500ms ease;
       &.fade {
@@ -239,11 +239,11 @@ $colors: (
         max-width: calc(100% - 50px);
         font-size: .8em;
         overflow-wrap: break-word;
-        h5 {
+        .title {
           margin: 0;
           font-weight: bold;
-          font-size: 1.2rem;
-          margin-bottom: 10px;
+          font-size: 1.2em;
+          margin-bottom: 5px;
         }
       }
       .toast-close {
@@ -425,3 +425,12 @@ $colors: (
       //opacity: 0;
     }
   }
+  @media (max-width: 400px) {
+    .toast-board {
+      width: 100%;
+      .toast {
+        width: calc(100% - 10px);
+      }
+    }
+    
+  } 
