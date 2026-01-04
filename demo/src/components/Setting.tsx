@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import { BeSwitch, BeInputNumber } from 'react-be-ui';
 import { useToast } from '../../../src/index.tsx'
@@ -11,8 +11,6 @@ const colorList = ['red', 'orange', 'yellow', 'lightgreen', 'green', 'lightblue'
 function Setting () {
 
   const toast = useToast()
-
-  
 
   const [state, setState] = useState('default')
   const [theme, setTheme] = useState('default')
@@ -40,6 +38,10 @@ function Setting () {
       theme // 'light', 'icon', 'icon-bg', 'line'
     })
   }
+
+  useEffect(() => {
+    handleClick()
+  }, [option, theme, state, timeout])
 
   const clearToast = () => toast.clear()
 
@@ -152,8 +154,8 @@ function Setting () {
         <div className="be-segment border">
           <div className="contents">
             <div className="check-set" >
-              <BeSwitch round checked={!option.freeze} onChange={setFreeze} />
-              <div className="desc">자동 삭제 사용(use Auto Close)</div>
+              <BeSwitch round checked={option.freeze} onChange={setFreeze} />
+              <div className="desc">{option.freeze ? '수동' : '자동'} 삭제 (set auto close mode)</div>
             </div>
           </div>
         </div>

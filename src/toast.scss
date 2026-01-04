@@ -16,6 +16,7 @@ $lightAttention: #FFE9D6;
 $lightImportant: #FFF3D7;
 
 $white: #FFFFFF;
+$black: #333;
 
 $stateColors: (
     'success': (
@@ -42,10 +43,10 @@ $stateColors: (
       text: $white,
       lightBg: $lightAttention,
     ),
-    'important': (
+    'importance': (
       bg: $important,
       border: color.adjust($important, $lightness: -10%),
-      text: $white,
+      text: $black,
       lightBg: $lightImportant,
     ),
 );

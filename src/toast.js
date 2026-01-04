@@ -33,9 +33,9 @@ class Toast {
     if (this.options.theme === 'light') {
       this.toast.classList.add(`${this.type}`, `light`)
     } else if (this.options.theme === 'icon') {
-      this.icon.classList.add(`${this.type}-text`)
+      this.icon?.classList.add(`${this.type}-text`)
     } else if (this.options.theme === 'icon-bg') {
-      this.icon.classList.add(`${this.type}`)
+      this.icon?.classList.add(`${this.type}`)
     } else if (this.options.theme === 'line') {
       this.toast.classList.add(`line-left`)
       contents.classList.add(`${this.type}-border`)
