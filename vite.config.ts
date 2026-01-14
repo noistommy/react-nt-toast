@@ -40,7 +40,7 @@ const demoConfig = defineConfig({
   root: "./demo",
   base: process.env.NODE_ENV === 'production' ? '/react-nt-toast/' : '/',
   server: {
-    port: 5190
+    port: 5904
   }
 })
 
