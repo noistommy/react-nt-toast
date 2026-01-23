@@ -3,7 +3,7 @@
   "description": "Toast system context with react",
   "author": "Minyoung Tommy Kim",
   "private": false,
-  "version": "0.1.1",
+  "version": "0.1.2",
   "type": "module",
   "scripts": {
     "dev": "MODE=demo vite",
@@ -20,7 +20,8 @@
     ".": {
       "import": "./dist/nt-toast.es.js",
       "require": "./dist/nt-toast.umd.js"
-    }
+    },
+    "./toast.css": "./dist/toast.css"
   },
   "files": [
     "dist",
@@ -35,7 +36,6 @@
     "notification",
     "toast"
   ],
-  "style": "./dist/toast.css",
   "dependencies": {
     "react": "^19.1.1",
     "react-be-ui": "^0.1.7",
