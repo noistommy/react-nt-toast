@@ -22,7 +22,7 @@ class Toast {
 
   notify() {
     this.toast = document.createElement('div')
-    this.toast.classList.add('toast', 'swing')
+    this.toast.classList.add('toast', 'swing', this.options.theme)
     // const contents = document.createElement('div')
 
     const contents = this.setContents()

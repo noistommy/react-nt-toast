@@ -17,9 +17,9 @@ function Setting () {
   const [position, setPosition] = useState('bottom-right')
   const [option, setOption] = useState({
     useTitle: true,
-    useIcon: false,
+    useIcon: true,
     round: false,
-    closeButton: false,
+    closeButton: true,
     displayOnTop: false,
     snackbar: false,
     freeze: false
