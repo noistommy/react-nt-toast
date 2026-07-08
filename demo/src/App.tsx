@@ -2,6 +2,7 @@ import './App.scss'
 
 import Menu from './components/Menu'
 import Setting from './components/Setting'
+import Cabinet from './NTCabinet/Cabinet.tsx'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         </div>
       </header>
       <Setting />
+      <Cabinet />
     </>
   )
 }

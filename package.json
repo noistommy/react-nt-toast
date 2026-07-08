@@ -12,7 +12,8 @@
     "build:demo": "MODE=demo vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .tsx,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/",
+    "docs": "rm -rf docs && cp -rf demo/dist docs"
   },
   "main": "./dist/nt-toast.umd.js",
   "module": "./dist/nt-toast.es.js",

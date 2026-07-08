@@ -83,35 +83,30 @@ function Setting () {
         </div>
         <div className="be-grid divide-2 divide-xs-1">
             <div className="column">
-              <div className="be-list list">
-                <div className="item be-message set-item">
-                  <div className="desc">제목 사용(Use Title)</div>
-                  <div className="btn">
-                    <BeSwitch round checked={option.useTitle} onChange={setUseTitle} />
-                  </div>
+              <div className="be-message be flex between mid">
+                <div className="desc">제목 사용(Use Title)</div>
+                <div className="btn">
+                  <BeSwitch round checked={option.useTitle} onChange={setUseTitle} />
                 </div>
-                <div className="item be-message set-item">
-                  <div className="desc">아이콘 사용(Use Icon)</div>
-                  <div className="btn">
-                    <BeSwitch round checked={option.useIcon} onChange={setUseIcon} />
-                  </div>
+              </div>
+              <div className="be-message  be flex between mid">
+                <div className="desc">아이콘 사용(Use Icon)</div>
+                <div className="btn">
+                  <BeSwitch round checked={option.useIcon} onChange={setUseIcon} />
                 </div>
-                
               </div>
             </div>
             <div className="column">
-              <div className="be-list list">
-                <div className="item be-message set-item">
-                  <div className="desc">둥근 모서리 사용(Use Round)</div>
-                  <div className="btn">
-                    <BeSwitch round checked={option.round} onChange={setRound} />
-                  </div>
+              <div className="item be-message  be flex between mid">
+                <div className="desc">둥근 모서리 사용(Use Round)</div>
+                <div className="btn">
+                  <BeSwitch round checked={option.round} onChange={setRound} />
                 </div>
-                <div className="item be-message set-item">
-                  <div className="desc">닫기 버튼 사용(Use Close Button)</div>
-                  <div className="btn">
-                    <BeSwitch round checked={option.closeButton} onChange={setCloseButton} />
-                  </div>
+              </div>
+              <div className="item be-message  be flex between mid">
+                <div className="desc">닫기 버튼 사용(Use Close Button)</div>
+                <div className="btn">
+                  <BeSwitch round checked={option.closeButton} onChange={setCloseButton} />
                 </div>
               </div>
             </div>
