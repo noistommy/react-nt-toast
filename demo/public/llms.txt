@@ -1,0 +1,30 @@
+# react-nt-toast
+
+> React용 알림(Toast) 시스템 라이브러리. React Context API를 통해 프로젝트 내에서 사용할 수 있도록 제작되었으며, 애플리케이션 외부(최상단 레이어)에서 동작하여 내부 레이어 시스템의 영향을 받지 않도록 설계되었습니다.
+
+콘텐츠 종류에 따라 "성공(success)", "위험(danger)", "정보(info)", "주의(attention)", "중요(important)" 상태 표시를 제공합니다. 테마, 위치, 스낵바 모드 등 여러 옵션을 전역으로 설정해 시스템 전체에 반영할 수 있고, 토스트를 실행할 때마다 개별적으로 옵션을 변경해 적용할 수도 있습니다.
+
+- 언어/기술 스택: JavaScript, Sass, Vite, React Context API(useToast)
+- 설치: `npm install react-nt-toast --save`
+- 주요 API: `ToastProvider`, `useToast` (`show`, `success`, `info`, `danger`, `clear`)
+
+## Docs
+
+- [README](https://github.com/noistommy/react-nt-toast/blob/main/README.md): 설치, Provider 설정, 사용법(show/success/info/danger/clear), Parameters, Properties(useTitle, useIcon, round, closeButton, displayOnTop, snackbar, freeze, timeout, theme, position) 설명
+- [Demo](https://noistommy.github.io/react-nt-toast): 실제 동작을 확인할 수 있는 데모 페이지 (Vite 기반 SPA)
+
+## Source
+
+- [GitHub Repository](https://github.com/noistommy/react-nt-toast): 소스 코드
+- [vue-nt-toast](https://github.com/noistommy/vue-nt-toast): 동일 컨셉의 Vue 버전
+
+## Optional
+
+- [Issues](https://github.com/noistommy/react-nt-toast/issues): 버그 리포트 및 기능 요청
+
+## Other modules
+
+- [vue-nt-modal](https://noistommy.github.io/vue-nt-modal): Vue용 모달 기능 모듈
+- [react-nt-modal](https://noistommy.github.io/react-nt-modal): React용 모달 기능 모듈
+- [vue-nt-toast](https://noistommy.github.io/vue-nt-toast): Vue용 Toast 알람 기능 모듈
+- [vue-nt-tooltip](https://noistommy.github.io/vue-nt-tooltip): Vue용 directive tooltip 모듈
