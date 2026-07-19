@@ -1,12 +1,12 @@
 
 react-nt-toast
 ================
-![Static Badge](https://img.shields.io/badge/React-only-%234FC08D?style=for-the-badge)
-![Static Badge](https://img.shields.io/badge/javascript-%23F7DF1E?style=for-the-badge)
-![Static Badge](https://img.shields.io/badge/html-%23E34F26?style=for-the-badge&logo=html)
-![Static Badge](https://img.shields.io/badge/sass-%23CC6699?style=for-the-badge)
-![Static Badge](https://img.shields.io/badge/vite-bundler-%23646CFF?style=for-the-badge)
-![Static Badge](https://img.shields.io/badge/react_context_api-useToast-%234FC08D?style=for-the-badge)
+![Static Badge](https://img.shields.io/badge/React-only-%234FC08D)
+![Static Badge](https://img.shields.io/badge/javascript-%23F7DF1E)
+![Static Badge](https://img.shields.io/badge/html-%23E34F26?logo=html)
+![Static Badge](https://img.shields.io/badge/sass-%23CC6699)
+![Static Badge](https://img.shields.io/badge/vite-bundler-%23646CFF)
+![Static Badge](https://img.shields.io/badge/react_context_api-useToast-%234FC08D)
 
 <!-- ![preview](https://github.com/noistommy/vue-nt-toast/assets/6008185/991fe4fc-1144-440d-8b20-de1ede57f0b7) -->
 
