@@ -38,6 +38,7 @@
     "toast"
   ],
   "dependencies": {
+    "nt-cabinet-component": "github:noistommy/nt-cabinet-component",
     "react": "^19.1.1",
     "react-be-ui": "^0.1.7",
     "react-dom": "^19.1.1"

@@ -2,7 +2,8 @@ import './App.scss'
 
 import Menu from './components/Menu'
 import Setting from './components/Setting'
-import Cabinet from './NTCabinet/Cabinet.tsx'
+// import Cabinet from './NTCabinet/Cabinet.tsx'
+import {NtCabinetReact} from 'nt-cabinet-component/react'
 
 function App() {
   return (
@@ -29,7 +30,7 @@ function App() {
         </div>
       </header>
       <Setting />
-      <Cabinet />
+      <NtCabinetReact module="react-nt-toast" />
     </>
   )
 }
