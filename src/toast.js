@@ -22,7 +22,10 @@ class Toast {
 
   notify() {
     this.toast = document.createElement('div')
-    this.toast.classList.add('toast', 'swing', this.options.theme)
+    this.toast.classList.add('toast', 'swing')
+    if (this.options.theme) {
+      this.toast.classList.add(this.options.theme)
+    }
     // const contents = document.createElement('div')
 
     const contents = this.setContents()
@@ -74,14 +77,14 @@ class Toast {
     title.classList.add('title', 'ellipsis')
     const description = document.createElement('div')
     if (typeof this.msg === 'string') {
-      description.innerHTML = this.msg
+      description.textContent = this.msg
       contents.appendChild(description)
     } else {
       if (this.options.useTitle) {
-        title.innerHTML = this.msg.title
+        title.textContent = this.msg.title
         contents.appendChild(title)
       }
-      description.innerHTML = this.msg.description
+      description.textContent = this.msg.description
       contents.appendChild(description)
     }
     return contents

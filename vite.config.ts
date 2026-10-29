@@ -2,6 +2,7 @@ import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import type { LibraryFormats } from 'vite'
 import react from '@vitejs/plugin-react'
+import dts from 'vite-plugin-dts'
 
 const __dirname = resolve()
 
@@ -11,11 +12,18 @@ const commonConfig = {
 
 const libConfig = {
   ...commonConfig,
+  plugins: [
+    react(),
+    dts({
+      tsconfigPath: './tsconfig.app.json',
+      outDir: 'dist',
+    }),
+  ],
   build: {
     lib: {
       entry: resolve(__dirname, './src/index.tsx'),
       name: 'nt-toast',
-      fileName: (format: any) => `nt-toast.${format}.js`,
+      fileName: (format: LibraryFormats) => `nt-toast.${format}.js`,
       formats: ['es', 'cjs', 'umd'] as LibraryFormats[],
     },
     rollupOptions: {
@@ -27,7 +35,7 @@ const libConfig = {
         },
         // Use `index.css` for css
         assetFileNames: (assetInfo: any) => {
-          if (assetInfo.name !== "toast.css") return "toast.css"
+          if (assetInfo.name !== "toast.css") return "nt-toast.css"
           return assetInfo.name
         }
       }

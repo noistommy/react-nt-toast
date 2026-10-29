@@ -27,10 +27,10 @@ function Menu () {
     <div className="menu-wrapper">
       <nav>
         <li>
-          <BeButtons buttons={buttons} selectIndex={2} onChange={handleChange} />
+          <BeButtons className="small" buttons={buttons} selectIndex={2} onChange={handleChange} />
         </li>
         <li>
-          <BeButton icon="xi-github" link={'https://github.com/noistommy/react-nt-toast.git'} linkTarget="_blank" />
+          <BeButton className="small" icon="xi-github" link={'https://github.com/noistommy/react-nt-toast.git'} linkTarget="_blank" />
         </li>
       </nav>
     </div>

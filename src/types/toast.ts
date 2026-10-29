@@ -1,4 +1,4 @@
-export type ToastType = 'success' | 'info' | 'danger' | 'warning' | 'important';
+export type ToastType = 'default' | 'success' | 'info' | 'danger' | 'attention' | 'important';
 
 export type ToastTheme = 'light' | 'icon' | 'icon-bg' | 'line' | '';
 
@@ -31,6 +31,20 @@ export interface ToastOptions {
   clickToClose?: boolean;
 }
 
+export interface ToastBoardInstance {
+  toastId: number;
+  options: ToastOptions;
+  board: HTMLElement | null;
+  intervals: Set<number>;
+  show: (type: ToastType, contents: string | ToastContents, options?: ToastOptions) => void;
+  hideToast: (toast: HTMLElement) => void;
+  removeToast: (toast: HTMLElement) => void;
+  clearToast: () => void;
+  clear: () => void;
+  stopAllTimeouts: () => void;
+  resumeAllTimeouts: () => void;
+}
+
 export interface ToastContextType {
   show: (
     type: ToastType,
@@ -44,7 +58,7 @@ export interface ToastContextType {
   warning: (contents: string | ToastContents, options?: ToastOptions) => number | void;
   danger: (contents: string | ToastContents, options?: ToastOptions) => number | void;
   important: (contents: string | ToastContents, options?: ToastOptions) => number | void;
-  toastBoard: any;
+  toastBoard: ToastBoardInstance;
 }
 
 

@@ -2,14 +2,14 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 
 import './index.css'
-import 'react-be-ui/react-be-ui.css'
 import App from './App.tsx'
 
 import { ToastProvider } from '../../src/index.tsx'
-import '../../src/toast.scss'
+import {type ToastOptions} from '../../src/types/toast.ts'
+// import '../../src/toast.scss'
 
-const defaultToastOptions = {
-  useTitle: true,
+const defaultToastOptions: ToastOptions = {
+  useTitle: true, 
   useIcon: true,
   round: false,
   closeButton: true,

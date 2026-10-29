@@ -5,14 +5,12 @@ class ToastBoard {
     this.toastId = 0
     this.options = options
     this.board = null
-    this.intervals = []
+    this.intervals = new Set()
   }
   show(type, contents, options) {
-    const extendOption = { ...this.options, ...options }
-    if (extendOption.snackbar) {
-      this.clear()
-    }
-    let closeEl = null
+    const extendOption = { position: 'bottom-right', timeout: 3000,...this.options, ...options }
+    if (extendOption.snackbar) this.clear()
+
     this.toastId++
     this.board = this.getBoard(extendOption)
 
@@ -20,25 +18,25 @@ class ToastBoard {
     toastEl.dataset.timeout = extendOption.timeout
     toastEl.dataset.freeze = extendOption.freeze ? 'true' : 'false'
     toastEl.setAttribute("style", `--id: ${this.toastId}`)
+
     if (extendOption.closeButton) {
-      closeEl = this.setClose()
+      const closeEl = this.setClose()
+      closeEl.addEventListener('click', (e) => {
+        e.stopPropagation()
+        this.hideToast(toastEl)
+      })
       toastEl.appendChild(closeEl)
     }
     this.board.appendChild(toastEl)
-    let interval = null
+    // let interval = null
     if (!extendOption.freeze) {
-      interval = setTimeout(() => this.hideToast(toastEl, interval), extendOption.timeout)
+      const interval = setTimeout(() => this.hideToast(toastEl, interval), extendOption.timeout)
       toastEl._interval = interval
-      this.intervals.push(interval)
+      this.intervals.add(interval)
     }
     if (extendOption.clickToClose) {
       toastEl.addEventListener('click', () => {
-        this.hideToast(toastEl, interval)
-      })
-    }
-    if (extendOption.closeButton && closeEl) {
-      closeEl.addEventListener('click', () => {
-        this.hideToast(toastEl, interval)
+        this.hideToast(toastEl)
       })
     }
   }
@@ -68,24 +66,33 @@ class ToastBoard {
     closeButton.innerHTML = '<span>&times;</span>'
     return closeButton
   }
-  hideToast(toast, interval) {
+  hideToast(toast) {
     this.toastId--
-    if (interval) {
-      clearTimeout(interval)
-      this.intervals = this.intervals.filter(i => i !== interval)
-    }
-    if (toast._interval === interval) {
+    if (!toast || toast._isHiding) return
+    toast._isHiding = true
+
+    if (toast._interval) {
+      clearTimeout(toast._interval)
+      this.intervals.delete(toast._interval)
       toast._interval = null
     }
+
     toast.classList.remove('swing')
-    toast.addEventListener('transitionend', () => {
+
+    let removed = false
+    const done = () => {
+      if (removed) return
+      removed = true
       this.removeToast(toast)
-      clearTimeout(interval)
-    })
+    }
+
+    toast.addEventListener('animationend', done, { once: true })
+    toast.addEventListener('transitionend', done, { once: true })
+    setTimeout(done, 600)
   }
   removeToast(toast) {
     toast.remove()
-    if (!this.toastId) {
+    if (this.board && this.board.querySelectorAll('.toast').length === 0) {
       this.clear()
     }
   }
@@ -93,7 +100,7 @@ class ToastBoard {
     if (!this.board) return
     const toasts = this.board.querySelectorAll('.toast')
     toasts.forEach(t => {
-      this.hideToast(t, null)
+      this.hideToast(t)
     })
   }
   clear() {
@@ -101,9 +108,8 @@ class ToastBoard {
       this.board.remove()
       this.board = null
     }
-    this.toastId = 0
-    this.intervals.forEach(interval => clearTimeout(interval))
-    this.intervals = []
+    this.intervals.forEach(clearTimeout)
+    this.intervals.clear()
   }
   stopAllTimeouts() {
     if (!this.board) return
@@ -111,7 +117,7 @@ class ToastBoard {
     toasts.forEach(t => {
       if (t._interval) {
         clearTimeout(t._interval)
-        this.intervals = this.intervals.filter(i => i !== t._interval)
+        this.intervals.delete(t._interval)
         t._interval = null
       }
     })
@@ -119,15 +125,12 @@ class ToastBoard {
   resumeAllTimeouts() {
     if (!this.board) return
     const toasts = this.board.querySelectorAll('.toast')
-    toasts.forEach((t, i) => {
-      if (t.dataset.freeze === 'true') return
-      if (t._interval) return
-      // const timeout = Number(t.dataset.timeout) || this.options.timeout
-      const timeout = 1000 + (i * 200)
-      let interval = null
-      interval = setTimeout(() => this.hideToast(t, interval), timeout)
-      t._interval = interval
-      this.intervals.push(interval)
+    toasts.forEach((t) => {
+      if (t.dataset.freeze === 'true' || t._interval || t._isHiding) return
+      const timeout = Number(t.dataset.timeout) || this.options.timeout || 3000
+      const timer = setTimeout(() => this.hideToast(t), timeout)
+      t._interval = timer
+      this.intervals.add(timer)
     })
   }
 }

@@ -1,21 +1,47 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 import { BeSwitch, BeInputNumber } from 'react-be-ui';
 import { useToast } from '../../../src/index.tsx'
+import type { ToastType, ToastTheme, ToastPosition, ToastOptions } from '../../../src/types/toast.ts'
 
-const status = ['success', 'info', 'danger', 'attention', 'importance'];
-const themes = ['default', 'light', 'icon', 'icon-bg', 'line'];
-const positions = ['top-left', 'top-center', 'top-right', 'bottom-left', 'bottom-center', 'bottom-right', 'top-full-width', 'bottom-full-width'];
-const colorList = ['red', 'orange', 'yellow', 'lightgreen', 'green', 'lightblue', 'blue', 'deepblue', 'deeppurple', 'purple', 'brown', 'gray']
-  
+const status = ['success', 'info', 'danger', 'attention', 'important'] as const;
+const themes = ['default', 'light', 'icon', 'icon-bg', 'line'] as const;
+const positions = [
+  'top-left',
+  'top-center',
+  'top-right',
+  'bottom-left',
+  'bottom-center',
+  'bottom-right',
+  'top-full-width',
+  'bottom-full-width'
+] as const;
+const colorList = [
+  'red',
+  'orange',
+  'yellow',
+  'lightgreen',
+  'green',
+  'lightblue',
+  'blue',
+  'deepblue',
+  'deeppurple',
+  'purple',
+  'brown',
+  'gray'
+] as const;
+
+type ToastStatus = 'default' | (typeof status)[number] | (typeof colorList)[number];
+type ThemeOption = (typeof themes)[number];
+type PositionOption = (typeof positions)[number];
+
 function Setting () {
-
   const toast = useToast()
 
-  const [state, setState] = useState('default')
-  const [theme, setTheme] = useState('default')
-  const [position, setPosition] = useState('bottom-right')
-  const [option, setOption] = useState({
+  const [state, setState] = useState<ToastStatus>('default')
+  const [theme, setTheme] = useState<ThemeOption>('default')
+  const [position, setPosition] = useState<PositionOption>('bottom-right')
+  const [option, setOption] = useState<ToastOptions>({
     useTitle: true,
     useIcon: true,
     round: false,
@@ -24,49 +50,56 @@ function Setting () {
     snackbar: false,
     freeze: false
   })
-  const [timeout, setTimeout] = useState(5000)
+  const [timeout, setTimeoutVal] = useState<number>(5000)
 
+  const handleClick = useCallback(() => {
+    const selectedTheme: ToastTheme = theme === 'default' ? '' : theme;
+    const selectedPosition: ToastPosition = window.innerWidth < 480 ? 'bottom-full-width' : position;
 
-  const handleClick = () => {
-    toast.show(state, {
+    toast.show(state as ToastType, {
       title: state.toUpperCase(),
       description: `This is ${state} toast`
     }, {
       ...option,
       timeout,
-      position: window.innerWidth < 480 ? 'bottom-full-width' : position,
-      theme // 'light', 'icon', 'icon-bg', 'line'
+      position: selectedPosition,
+      theme: selectedTheme
     })
-  }
+  }, [toast, state, option, timeout, position, theme])
 
   useEffect(() => {
     handleClick()
-  }, [option, theme, state, timeout])
+  }, [handleClick])
 
   const clearToast = () => toast.clear()
 
-  const setUseTimeout = (value) => setTimeout(value)
+  const setUseTimeout = (value: string) => {
+    const num = Number(value)
+    if (!isNaN(num)) {
+      setTimeoutVal(num)
+    }
+  }
 
-  const setUseTitle = (value) => {
-    setOption({...option, useTitle: value})
+  const setUseTitle = (name: string, value: boolean) => {
+    setOption(prev => ({ ...prev, useTitle: value }))
   }
-  const setUseIcon = (value) => {
-    setOption({...option, useIcon: value})
+  const setUseIcon = (name: string, value: boolean) => {
+    setOption(prev => ({ ...prev, useIcon: value }))
   }
-  const setRound = (value) => {
-    setOption({...option,round: value})
+  const setRound = (name: string, value: boolean) => {
+    setOption(prev => ({ ...prev, round: value }))
   }
-  const setCloseButton = (value) => {
-    setOption({...option,closeButton: value})
+  const setCloseButton = (name: string, value: boolean) => {
+    setOption(prev => ({ ...prev, closeButton: value }))
   }
-  const setDisplayOnTop = (value) => {
-    setOption({...option,displayOnTop: value})
+  const setDisplayOnTop = (name: string, value: boolean) => {
+    setOption(prev => ({ ...prev, displayOnTop: value }))
   }
-  const setSnackbar = (value) => {
-    setOption({...option,snackbar: value})
+  const setSnackbar = (name: string, value: boolean) => {
+    setOption(prev => ({ ...prev, snackbar: value }))
   }
-  const setFreeze = (value) => {
-    setOption({...option,freeze: value})
+  const setFreeze = (name: string, value: boolean) => {
+    setOption(prev => ({ ...prev, freeze: value }))
   }
 
   return (

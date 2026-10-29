@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useRef, useEffect } from 'react';
+import React, { createContext, useContext, useRef, useEffect , useCallback, useMemo } from 'react';
 import type { ReactNode } from 'react';
 import ToastBoard from './toastBoard';
 import type { ToastContextType, ToastOptions, ToastContents, ToastType } from './types/toast.ts';
@@ -13,71 +13,49 @@ interface ToastProviderProps {
 }
 
 export const ToastProvider: React.FC<ToastProviderProps> = ({ children, defaultOptions = {} }) => {
-  const toastBoardRef = useRef<any>(null);
+  const toastBoardRef = useRef<ToastBoard>(null);
 
   if (window.innerWidth < 480) {
     defaultOptions.position = 'bottom-full-width';
   }
 
   useEffect(() => {
-    toastBoardRef.current = new ToastBoard(defaultOptions);
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 480;
+    const initialOptions: ToastOptions = {
+      ...defaultOptions,
+      ...(isMobile && !defaultOptions.position ? { position: 'bottom-full-width' } : {})
+    };
+    toastBoardRef.current = new ToastBoard(initialOptions);
 
     return () => {
-      if (toastBoardRef.current) {
-        toastBoardRef.current.clear();
-      }
+      toastBoardRef.current?.clear();
+      toastBoardRef.current = null;
     };
-  }, [defaultOptions]);
+  }, [JSON.stringify(defaultOptions)]);
 
-  const show = (type: ToastType, contents: string | ToastContents, options: ToastOptions = {}): number | void => {
-    if (!toastBoardRef.current) {
-      console.error('ToastBoard not initialized');
-      return;
-    }
-    return toastBoardRef.current.show(type, contents, options);
-  };
+  const show = useCallback((type: ToastType, contents: string | ToastContents, options: ToastOptions = {}): number | void => {
+    return toastBoardRef.current?.show(type, contents, options);
+  }, []);
 
-  const clearToast = (): void => {
-    if (!toastBoardRef.current) return;
-    return toastBoardRef.current.clearToast();
-  };
+  const clearToast = useCallback((): void => {
+    return toastBoardRef.current?.clearToast();
+  }, []);
 
-  const clear = (): void => {
-    if (!toastBoardRef.current) return;
-    return toastBoardRef.current.clear();
-  };
+  const clear = useCallback((): void => {
+    return toastBoardRef.current?.clear();
+  }, []);
 
-  const success = (contents: string | ToastContents, options: ToastOptions = {}): number | void => {
-    return show('success', contents, options);
-  };
-
-  const info = (contents: string | ToastContents, options: ToastOptions = {}): number | void => {
-    return show('info', contents, options);
-  };
-
-  const warning = (contents: string | ToastContents, options: ToastOptions = {}): number | void => {
-    return show('warning', contents, options);
-  };
-
-  const danger = (contents: string | ToastContents, options: ToastOptions = {}): number | void => {
-    return show('danger', contents, options);
-  };
-
-  const important = (contents: string | ToastContents, options: ToastOptions = {}): number | void => {
-    return show('important', contents, options);
-  };
-
-  const value: ToastContextType = {
+  const value = useMemo<ToastContextType>(() => ({
     show,
     clearToast,
     clear,
-    success,
-    info,
-    warning,
-    danger,
-    important,
-    toastBoard: toastBoardRef.current
-  };
+    success: (c, o) => show('success', c, o), // c: contents | o: options
+    info: (c, o) => show('info', c, o),
+    warning: (c, o) => show('attention', c, o),
+    danger: (c, o) => show('danger', c, o),
+    important: (c, o) => show('important', c, o),
+    get toastBoard() { return toastBoardRef.current; } // getter로 항상 최신 인스턴스 반환
+  }), [show, clear, clearToast]);
 
   return (
     <ToastContext.Provider value={value}>
