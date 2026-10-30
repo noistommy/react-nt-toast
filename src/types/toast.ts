@@ -29,6 +29,7 @@ export interface ToastOptions {
   theme?: ToastTheme;
   position?: ToastPosition;
   clickToClose?: boolean;
+  iconType?: 'solid' | 'outline';
 }
 
 export interface ToastBoardInstance {

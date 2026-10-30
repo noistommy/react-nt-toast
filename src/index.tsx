@@ -14,11 +14,7 @@ interface ToastProviderProps {
 
 export const ToastProvider: React.FC<ToastProviderProps> = ({ children, defaultOptions = {} }) => {
   const toastBoardRef = useRef<ToastBoard>(null);
-
-  if (window.innerWidth < 480) {
-    defaultOptions.position = 'bottom-full-width';
-  }
-
+  const defaultOptionsStr = JSON.stringify(defaultOptions);
   useEffect(() => {
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 480;
     const initialOptions: ToastOptions = {
@@ -31,7 +27,7 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({ children, defaultO
       toastBoardRef.current?.clear();
       toastBoardRef.current = null;
     };
-  }, [JSON.stringify(defaultOptions)]);
+  }, [defaultOptionsStr]);
 
   const show = useCallback((type: ToastType, contents: string | ToastContents, options: ToastOptions = {}): number | void => {
     return toastBoardRef.current?.show(type, contents, options);

@@ -34,7 +34,7 @@ const libConfig = {
           'react-dom': 'ReactDOM',
         },
         // Use `index.css` for css
-        assetFileNames: (assetInfo: any) => {
+        assetFileNames: (assetInfo: {name?: string}) => {
           if (assetInfo.name !== "toast.css") return "nt-toast.css"
           return assetInfo.name
         }
@@ -54,7 +54,6 @@ const demoConfig = defineConfig({
 
 // https://vite.dev/config/
 export default defineConfig(({ command }) => {
-  console.log(command)
   const executionMode = process.env.MODE || "lib";
 
   const mode = command === 'build' ? "production" : "development";

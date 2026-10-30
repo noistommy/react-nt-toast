@@ -64,11 +64,10 @@ class Toast {
     if (!this.options.useIcon || this.options.theme === 'line') return
     this.icon = document.createElement('div')
     this.icon.classList.add('toast-icon')
-    const iconClass = statusIconSolid[this.type] || statusIconSolid['info']
-    this.icon.innerHTML = iconClass
-    // this.icon.innerHTML = `<i class="fa fa-${iconClass}" />`
-    // this.icon.innerHTML = `<img src="./icons/success.svg" />`
-    // this.toast.appendChild(this.icon)
+
+    this.icon.innerHTML = this.options.iconType === 'solid' ? 
+      statusIconSolid[this.type] || statusIconSolid['info'] : 
+      statusIcon[this.type] || statusIcon['info']
     this.toast.appendChild(this.icon)
   }
   setContents() { 
